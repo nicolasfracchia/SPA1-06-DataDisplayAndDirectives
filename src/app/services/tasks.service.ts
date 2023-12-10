@@ -36,5 +36,9 @@ export class TasksService {
   deleteTask(taskId: number){
     return this.http.delete<Itask>(`http://127.0.0.1:3000/tasks/${taskId}`);
   }
+
+  lazyHomeContent(repoReadmeURL: string){
+    return this.http.get(repoReadmeURL, { responseType: 'text' });
+  }
   
 }
