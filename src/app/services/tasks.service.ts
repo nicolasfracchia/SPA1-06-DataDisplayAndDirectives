@@ -13,6 +13,10 @@ export class TasksService {
     return this.http.get<Itask[]>('http://127.0.0.1:3000/tasks');
   }
 
+  getTask(id:number){
+    return this.http.get<Itask>(`http://127.0.0.1:3000/tasks/${id}`);
+  }
+
   getPriorityLevel(){
     return ['LOW','MEDIUM','HIGH'];
   }
@@ -23,6 +27,10 @@ export class TasksService {
 
   createTask(frmData: FormData){
     return this.http.post<Itask>('http://127.0.0.1:3000/tasks', frmData);
+  }
+
+  updateTask(taskId: number, frmData: FormData){
+    return this.http.put<Itask>(`http://127.0.0.1:3000/tasks/${taskId}`, frmData);
   }
   
 }
