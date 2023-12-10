@@ -24,7 +24,9 @@
             <label class="fw-bold">Description:</label> <br />
             <p>{{ task.description }}</p>
             <div class="actions container-fluid text-end text-dark">
-                <button type="button"><i class="bi bi-pencil"></i></button>
+                <button type="button" [routerLink]="['/edit-task', task.id]">
+                    <i class="bi bi-pencil"></i>
+                </button>
                 <button type="button"><i class="bi bi-trash"></i></button>
             </div>
         </div>
