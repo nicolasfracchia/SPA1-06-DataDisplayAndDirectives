@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TasksService } from '../../services/tasks.service';
+import { Itask } from '../../interfaces/itask';
 
 @Component({
   selector: 'app-new-task',
@@ -11,46 +12,63 @@ import { TasksService } from '../../services/tasks.service';
   styleUrl: './new-task.component.css'
 })
 export class NewTaskComponent {
-  newTaskForm!: FormGroup;
+  tasksForm!: FormGroup;
   priorityLevels!: string[];
   progressLevels!: string[];
+  status_message: {type: string, message: string, show: boolean} = {type: '', message: '', show: false};
 
   constructor(private formBuilder: FormBuilder, private _taskService: TasksService){
     this.priorityLevels = _taskService.getPriorityLevel();
     this.progressLevels = _taskService.getProgressLevel();
-    this.newTaskForm = formBuilder.group({
-      title: ['', [Validators.required]],
-      category: ['', [Validators.required]],
-      dueDate: [''],
-      priorityLevel: ['', [Validators.required]],
-      progressLevel: ['', [Validators.required]]
+    this.tasksForm = formBuilder.group({
+      title: ['TASK FORM', [Validators.required]],
+      category: ['ASSIGNMENT', [Validators.required]],
+      task_date: ['2023-12-16'],
+      priority_level: ['LOW', [Validators.required]],
+      progress_level: ['STARTED', [Validators.required]],
+      description: ['some description to fill the blanks...', [Validators.required]]
     });
-    console.log(this.priorityLevels)
   }
 
 
   submitForm(){
-    if(!this.newTaskForm.valid){
-      console.log("THE FORM DID NOT PASS ALL THE VALIDATIONS!");
+    document.getElementById('status-messages')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if(!this.tasksForm.valid){
+      this.status_message = {type: 'warning', message: "THE FORM DID NOT PASS ALL THE VALIDATIONS!", show: true}
     }else{
-      console.log('FORM DATA:', this.newTaskForm.value);
-      this.newTaskForm.reset();
+      this.createTask();
     }
+    this.tasksForm.reset();
+  }
+
+  createTask(){
+    this._taskService.createTask(this.tasksForm.value).subscribe(
+      (result:Itask) => {
+        this.status_message = {type: 'success', message: "Task created successfully", show: true}
+      },
+      (error:any) => {
+        this.status_message = {type: 'danger', message: "Error creating the task: " + error.message, show: true}
+      }
+    );
   }
 
   get titleFormControl(){
-    return this.newTaskForm.get('title')!;
+    return this.tasksForm.get('title')!;
   }
   get categoryFormControl(){
-    return this.newTaskForm.get('category')!;
+    return this.tasksForm.get('category')!;
   }
   get dueDateFormControl(){
-    return this.newTaskForm.get('dueDate')!;
+    return this.tasksForm.get('task_date')!;
   }
   get priorityLevelFormControl(){
-    return this.newTaskForm.get('priorityLevel')!;
+    return this.tasksForm.get('priority_level')!;
   }
   get progressLevelFormControl(){
-    return this.newTaskForm.get('progressLevel')!;
+    return this.tasksForm.get('progress_level')!;
+  }
+  get descriptionFormControl(){
+    return this.tasksForm.get('description')!;
   }
 }

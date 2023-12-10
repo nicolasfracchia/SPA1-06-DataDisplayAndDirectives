@@ -20,5 +20,9 @@ export class TasksService {
   getProgressLevel(){
     return ['PENDING','STARTED','COMPLETED'];
   }
+
+  createTask(frmData: FormData){
+    return this.http.post<Itask>('http://127.0.0.1:3000/tasks', frmData);
+  }
   
 }
