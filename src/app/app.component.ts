@@ -13,5 +13,7 @@ import { HomeComponent } from './components/home/home.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'task-manager';
+  logo: string = 'https://www.ldatschool.ca/wp-content/uploads/2017/04/Pen-making-check-marks-in-boxes.jpg';
+  title: string = 'Task Manager';
+  author: string = 'Nicolas Fracchia';
 }

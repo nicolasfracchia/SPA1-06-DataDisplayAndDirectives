@@ -1,0 +1,11 @@
+nav ul li a{
+    color:white;
+    transition: .3s;
+}
+nav ul li:hover a{
+    color:yellow;
+}
+nav ul li a.active{
+    color:yellow;
+    border-bottom:solid 1px yellow;
+}

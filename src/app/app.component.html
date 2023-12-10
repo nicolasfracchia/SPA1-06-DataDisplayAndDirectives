@@ -1,3 +1,13 @@
-<app-navbar></app-navbar>
-<app-tasks></app-tasks>
-<app-home></app-home>
+<div id="general-container" class="col-12 d-flex justify-content-between h-100">
+    <div id="sidebar" class="col-md-3 bg-dark bg-gradient px-5 py-2">
+        <app-navbar [logo]="logo" [title]="title"></app-navbar>
+    </div>
+
+    
+    <main id="main-content" class="col-md-9 m-0 pt-0 pb-5 px-3 row h-100">
+        <app-tasks></app-tasks>
+        <!-- <app-home></app-home> -->
+    </main>
+    
+
+</div>

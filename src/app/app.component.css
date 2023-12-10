@@ -1,0 +1,9 @@
+#general-container{
+    height:100dvh;
+    overflow: auto;
+}
+#general-container #sidebar,
+#general-container #main-content{
+    height:100dvh;
+    overflow: auto;
+}

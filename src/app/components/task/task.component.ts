@@ -10,5 +10,12 @@ import { Itask } from '../../interfaces/itask'
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
+  
   @Input() task!: Itask;
+
+  changeClass(evt: Event): void{
+    const elementClick = evt.target as HTMLElement;
+    const element = elementClick.closest('.card-header');
+    element!.classList.toggle('selected');
+  }
 }

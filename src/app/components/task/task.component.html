@@ -1,24 +1,32 @@
-<div class="card">
-    <div class="card-header bg-success text-white" [ngClass]="
-        {
-            'bg-secondary': task.priority_level === 'LOW',
-            'bg-dark': task.priority_level === 'MEDIUM',
-            'bg-warning': task.priority_level === 'HIGH',
-            'bg-danger': task.priority_level === 'CRITICAL',
-        }
-    ">
-        <h4 class="card-title">{{ task.title }}</h4>
+<div class="card mb-3">
+    <div (click)="changeClass($event)" class="card-header border-0 p-0 d-flex justify-content-between" data-bs-toggle="collapse" [attr.data-bs-target]="'#data-collapse-'+task.id">
+        <div class="card-title m-0 col-6"
+            [ngClass]="
+            {
+                'border-secondary': task.priority_level === 'LOW',
+                'border-dark': task.priority_level === 'MEDIUM',
+                'border-warning': task.priority_level === 'HIGH',
+                'border-danger': task.priority_level === 'CRITICAL',
+            }
+        "> 
+            
+            <h4 class="m-0 p-3">
+                <i class="bi bi-chevron-right"></i> {{ task.title }}
+            </h4>
+        </div>
+        <div class="col-2 text-dark fw-bold">{{ task.category }}</div>
+        <div class="col-2 text-dark fw-bold">{{ task.progress_level }}</div>
+        <div class="col-2 text-dark fw-bold">{{ task.task_date | date }}</div>
     </div>
-    <div class="card-body bg-primary text-white">
-        <p>{{ task.description }}</p>
-        <hr>
-        <p>{{ task.category }}</p>
-        <hr>
-        <p>{{ task.task_date | date }}</p>
-        <hr>
-        <p>{{ task.priority_level }}</p>
-        <hr>
-        <p>{{ task.progress_level }}</p>
-        <hr>
+    <div class="collapse" [id]="'data-collapse-'+task.id">
+        <div class="card-body text-dark" [ngClass]="{'border-secondary': task.priority_level === 'LOW','border-dark': task.priority_level === 'MEDIUM','border-warning': task.priority_level === 'HIGH','border-danger': task.priority_level === 'CRITICAL'}">
+            <h6>Priority level: {{ task.priority_level }}</h6>
+            <label class="fw-bold">Description:</label> <br />
+            <p>{{ task.description }}</p>
+            <div class="actions container-fluid text-end text-dark">
+                <button type="button"><i class="bi bi-pencil"></i></button>
+                <button type="button"><i class="bi bi-trash"></i></button>
+            </div>
+        </div>
     </div>
 </div>
