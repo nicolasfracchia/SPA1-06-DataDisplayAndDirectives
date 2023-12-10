@@ -1,5 +1,34 @@
 <h2>Tasks List</h2>
 
-<div *ngFor="let taskItem of tasks">
-    <app-task [task]="taskItem"></app-task>
+<div id="status-messages">
+    <div *ngIf="status_message!.show" [class]="'bg-' + status_message.type + ' container rounded p-3 mb-5 text-center text-white fw-bold'">
+        {{ status_message.message }}
+    </div>
 </div>
+
+<div *ngFor="let taskItem of tasks">
+    <app-task [task]="taskItem" (deleteTask)="onTaskDelete($event)"></app-task>
+</div>
+
+<div class="modal fade" id="taskToDeleteModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">sure you want to delete this task: {{ taskToDelete?.title }}?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <p>Title: {{ taskToDelete?.title }}</p>
+            <p>Category: {{ taskToDelete?.category }}</p>
+            <p>Date: {{ taskToDelete?.task_date | date }}</p>
+            <p>Priority level: {{ taskToDelete?.priority_level }}</p>
+            <p>Progress level: {{ taskToDelete?.progress_level }}</p>
+            <p>Description: {{ taskToDelete?.description }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="confirmDeleteTask()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>

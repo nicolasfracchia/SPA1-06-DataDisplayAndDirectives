@@ -27,7 +27,9 @@
                 <button type="button" [routerLink]="['/edit-task', task.id]">
                     <i class="bi bi-pencil"></i>
                 </button>
-                <button type="button"><i class="bi bi-trash"></i></button>
+                <button type="button" (click)="onDelete()" data-bs-toggle="modal" data-bs-target="#taskToDeleteModal">
+                    <i class="bi bi-trash"></i>
+                </button>
             </div>
         </div>
     </div>

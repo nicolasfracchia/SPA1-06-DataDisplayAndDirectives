@@ -46,13 +46,11 @@ export class TaskFormComponent {
 
       this._taskService.getTask(this.taskId).subscribe(
         (result:Itask) => {
-          console.log('RESULT:', result);
           this.tasksForm.patchValue(result);
           let task_date = new Date(result.task_date);
           this.tasksForm.patchValue({'task_date': task_date.toISOString().substring(0, 10)});
         },
         (error:any) => {
-          console.log('ERROR:',error);
           this.status_message = {type: 'danger', message: "Error fetching the task information: " + error.message, show: true}
         }
       )
