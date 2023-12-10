@@ -1,0 +1,50 @@
+<h2>New task</h2>
+
+<form [formGroup]="newTaskForm" class="container col-8">
+    <div class="container input-container row mb-3 w-100">
+        <div class="col-4 border-bottom border-bottom-1"><label class="form-label">Title:</label></div>
+        <div class="col-8"><input type="text" class="form-control col-7" formControlName="title" /></div>
+        <span class="text-danger" *ngIf="titleFormControl.touched && titleFormControl.errors?.['required']">
+            Please insert a title for this task.
+        </span>
+    </div>
+    <div class="container input-container row mb-3 w-100">
+        <div class="col-4 border-bottom border-bottom-1"><label class="form-label">Category:</label></div>
+        <div class="col-8"><input type="text" class="form-control col-7" formControlName="category" /></div>
+        <span class="text-danger" *ngIf="categoryFormControl.touched && categoryFormControl.errors?.['required']">
+            Please set a category for this task.
+        </span>
+    </div>
+    <div class="container input-container row mb-3 w-100">
+        <div class="col-4 border-bottom border-bottom-1"><label class="form-label">Due Date:</label></div>
+        <div class="col-8"><input type="date" class="form-control col-7" formControlName="dueDate" /></div>
+    </div>
+    <div class="container input-container row mb-3 w-100">
+        <div class="col-4 border-bottom border-bottom-1"><label class="form-label">Priority Level:</label></div>
+        <div class="col-8">
+            <select class="form-control col-7" formControlName="priorityLevel">
+                <option value="">--- Select priority level ---</option>
+                <option *ngFor="let p of priorityLevels">{{p}}</option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="priorityLevelFormControl.touched && priorityLevelFormControl.errors?.['required']">
+            Please select the priority level for this task.
+        </span>
+    </div>
+    <div class="container input-container row mb-3 w-100">
+        <div class="col-4 border-bottom border-bottom-1"><label class="form-label">Progress Level:</label></div>
+        <div class="col-8">
+            <select class="form-control col-7" formControlName="progressLevel">
+                <option value=''>--- Select progress level ---</option>
+                <option *ngFor="let p of progressLevels">{{p}}</option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="progressLevelFormControl.touched && progressLevelFormControl.errors?.['required']">
+            Please select the progress level for this task.
+        </span>
+    </div>
+
+    <div class="input-container mb-3">
+        <button class="btn btn-primary" type="button" (click)="submitForm()" [disabled]="newTaskForm.invalid">Submit</button>
+    </div>
+</form>

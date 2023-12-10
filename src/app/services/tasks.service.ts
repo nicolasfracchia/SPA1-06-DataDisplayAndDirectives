@@ -12,4 +12,13 @@ export class TasksService {
   getTasks(){
     return this.http.get<Itask[]>('http://127.0.0.1:3000/tasks');
   }
+
+  getPriorityLevel(){
+    return ['LOW','MEDIUM','HIGH'];
+  }
+
+  getProgressLevel(){
+    return ['PENDING','STARTED','COMPLETED'];
+  }
+  
 }
